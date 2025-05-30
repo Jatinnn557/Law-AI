@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <style>
+        /* Style for summary container to prevent overflow */
+        .summary-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace, monospace;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loader styles */
+        #loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #007BFF;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Upload PDF</h2>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <strong><p>Summarizing your PDF... it might take a moment... please wait ⏳</p></strong>
+    </div>
+
+    <!-- Upload form -->
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Summary result -->
+    {% if summary %} 
+        <h3>Summary</h3>
+        <div class="summary-container">
+            <pre>{{ summary }}</pre>
+        </div>
+
+        <a href="{% url 'download_summary' form.instance.id %}">Download Summary</a>
+        <br><br>
+
+        <a href="{% url 'chat_pdf' form.instance.id %}">💬 Ask Questions About This PDF</a>
+    {% endif %}
+
+    <hr style="margin: 20px 0;">
+    <a href="{% url 'home' %}">⬅ Back to Home</a>
+</div>
+
+<!-- Show loader when form is submitted -->
+<script>
+    document.getElementById("uploadForm").addEventListener("submit", function () {
+        document.getElementById("loader").style.display = "block";
+    });
+</script>
+
+</body>
+</html>

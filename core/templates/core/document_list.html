@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <style>
+        .summary-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+        a {
+            display: inline-block;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .upload-form {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="spaced">
+        <h2>Create New Section</h2>
+        <form method="post" style="display: flex; gap: 10px;">
+            {% csrf_token %}
+            <input type="text" name="new_section_name" placeholder="New section name" required style="padding: 2px;">
+            <button type="submit" style="padding: 8px 16px;">Create Section</button>
+        </form>
+    </div>
+
+<hr style="margin: 20px 0;">
+
+<h2>Uploaded Documents</h2>
+
+    {% for section in sections %}
+        <div style="margin-bottom: 30px;">
+            <h3>{{ section.name }}</h3>
+
+            <!-- 🔽 File Upload Form -->
+            <form class="upload-form" data-section-id="{{ section.id }}">
+                {% csrf_token %}
+                <input type="file" name="file" onchange="uploadFile(this)">
+            </form>
+
+            <!-- 🔽 File List -->
+            <ul>
+                {% for doc in section.documents.all %}
+                    <li>{{ doc.title }} - {{ doc.uploaded_at }}
+                        <a href="{% url 'delete_document' doc.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <hr style="margin: 20px 0;">
+
+    <a href="{% url 'auto_classify_upload' %}">⬅ Back to Upload</a> |
+    <a href="{% url 'home' %}">Home</a>
+</div>
+
+<script>
+function uploadFile(input) {
+  const form = input.closest('.upload-form');
+  const sectionId = form.dataset.sectionId;
+  const file = input.files[0];
+  const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('csrfmiddlewaretoken', csrfToken);
+
+  fetch(`/sections/${sectionId}/upload/`, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      const sectionDiv = form.closest('div');
+      const ul = sectionDiv.querySelector('ul');
+      ul.insertAdjacentHTML('beforeend', data.html);
+      input.value = '';  // reset file input
+    } else {
+      alert(data.error || 'Upload failed.');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred.');
+  });
+}
+</script>
+
+</body>
+</html>

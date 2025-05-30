@@ -1,0 +1,4 @@
+<li id="doc-{{ doc.id }}">
+  {{ doc.title }} - {{ doc.uploaded_at }}
+  <a href="{% url 'delete_document' doc.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+</li>
