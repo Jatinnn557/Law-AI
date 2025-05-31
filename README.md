@@ -32,37 +32,37 @@ The solution is built to run locally or on a production server (using Waitress o
 ## Screenshots  
 
 ###  Login Page
-![Login Page](screenshots/loginpage.png)
+![Login Page](screenshots/loginpage.PNG)
 
 ###  New User Registration
-![Register](screenshots/NewUserRegister.png)
+![Register](screenshots/NewUserRegister.PNG)
 
 ###  Homepage After Login
-![Homepage](screenshots/Homepage.png)
+![Homepage](screenshots/Homepage.PNG)
 
 ###  Upload Document
-![Upload](screenshots/uploadpage.png)
+![Upload](screenshots/uploadpage.PNG)
 
 ###  Document Selection Page
-![Document Selector](screenshots/documentselectorpage.png)
+![Document Selector](screenshots/documentselectorpage.PNG)
 
 ###  Chat with AI – PDF Q&A
-![Chat with AI](screenshots/chatwithAI.png)
+![Chat with AI](screenshots/chatwithAI.PNG)
 
 ###  AI Response from PDF
-![AI Response 1](screenshots/responsefromAI.png)  
-![AI Response 2](screenshots/responsefromAI-2.png)
+![AI Response 1](screenshots/responsefromAI.PNG)  
+![AI Response 2](screenshots/responsefromAI-2.PNG)
 
 ###  Summary Page
-![Summary](screenshots/summarypage.png)
+![Summary](screenshots/summarypage.PNG)
 
 ###  Rental Document Generator
-![Rental Generator](screenshots/rentaldocumentgeneratorpage.png)  
-![Rental Generator 2](screenshots/rentaldocumentgeneratorpage-2.png)
+![Rental Generator](screenshots/rentaldocumentgeneratorpage.PNG)  
+![Rental Generator 2](screenshots/rentaldocumentgeneratorpage-2.PNG)
 
 ###  Document Separator Page
-![Document Separator](screenshots/documentseparatorpage.png)  
-![Document Separator 2](screenshots/documentseparatorpage-2.png)
+![Document Separator](screenshots/documentseparatorpage.PNG)  
+![Document Separator 2](screenshots/documentseparatorpage-2.PNG)
 
 ## Run Instructions
 
