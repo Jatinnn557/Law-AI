@@ -69,7 +69,7 @@ The solution is built to run locally or on a production server (using Waitress o
 ### Local Setup
 1. *Clone the repo:*
    bash
-   git clone https://github.com/yourusername/lawai.git
+   git clone https://github.com/Jatinnn557/lawai.git
    cd lawai
 
 2. **Create virtual environment and activate it:**
@@ -86,7 +86,7 @@ Create a .env file in the root directory with the following:
 bash
 SECRET_KEY=your_django_secret_key
 DATABASE_URL=your_render_database_url
-GEMINI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_geminiai_api_key
 
 5. *Migrate database and collect static files:*
 bash
