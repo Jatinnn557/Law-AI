@@ -79,11 +79,15 @@ WSGI_APPLICATION = 'lawai.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
-
+DATABASES['default'] = dj_database_url.parse("postgresql://law_ai_hh42_user:wDQfIJ1VURscqUUZBQljoDuwzhl6T8jt@dpg-d0t8s8m3jp1c73eb4frg-a.oregon-postgres.render.com/law_ai_hh42")
+ 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
