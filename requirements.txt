@@ -59,6 +59,7 @@ typing-inspection==0.4.1
 typing_extensions==4.13.2
 tzdata==2025.2
 urllib3==2.4.0
+waitress==3.0.2
 whitenoise==6.9.0
 win32_setctime==1.2.0
 WMI==1.5.1
